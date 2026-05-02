@@ -1,49 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VOGIX — Premium Streetwear</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet" />
 
   <style>
     /* =============================================
        VOGIX — LINK HUB — GLOBAL RESET & VARIABLES
     ============================================= */
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
     :root {
-      --bg-void:        #020408;
-      --bg-deep:        #060c14;
-      --glass-bg:       rgba(8, 16, 30, 0.72);
-      --glass-border:   rgba(80, 180, 255, 0.13);
-      --glass-shine:    rgba(255, 255, 255, 0.04);
-      --neon-blue:      #00c8ff;
-      --neon-violet:    #9b5de5;
-      --neon-chrome:    #c8e6ff;
-      --neon-silver:    #a0b4c8;
-      --accent-hot:     #0af;
-      --text-primary:   #eaf4ff;
-      --text-secondary: #7a9bb5;
-      --text-muted:     #3a5268;
-      --glow-blue:      0 0 40px rgba(0, 200, 255, 0.35), 0 0 80px rgba(0, 200, 255, 0.12);
-      --glow-violet:    0 0 40px rgba(155, 93, 229, 0.35), 0 0 80px rgba(155, 93, 229, 0.12);
-      --shadow-deep:    0 40px 80px rgba(0,0,0,0.9), 0 10px 30px rgba(0,0,0,0.7);
-      --radius-card:    24px;
-      --radius-btn:     14px;
+      --bg-void: #020408;
+      --bg-deep: #060c14;
+      --glass-bg: rgba(8, 16, 30, 0.72);
+      --glass-border: rgba(80, 180, 255, 0.13);
+      --glass-shine: rgba(255, 255, 255, 0.04);
+      --neon-blue: #00c8ff;
+      --neon-violet: #9b5de5;
+      --neon-chrome: #c8e6ff;
+      --neon-silver: #a0b4c8;
+      --accent-hot: #0af;
+      --text-primary: #eaf4ff;
+      --text-secondary: #8daec9;
+      --text-muted: #5b7a94;
+      --glow-blue: 0 0 40px rgba(0, 200, 255, 0.35), 0 0 80px rgba(0, 200, 255, 0.12);
+      --glow-violet: 0 0 40px rgba(155, 93, 229, 0.35), 0 0 80px rgba(155, 93, 229, 0.12);
+      --shadow-deep: 0 40px 80px rgba(0, 0, 0, 0.9), 0 10px 30px rgba(0, 0, 0, 0.7);
+      --radius-card: 24px;
+      --radius-btn: 14px;
       --transition-smooth: cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
 
     body {
       min-height: 100vh;
+      min-height: 100dvh;
       background-color: var(--bg-void);
       font-family: 'Rajdhani', sans-serif;
       color: var(--text-primary);
@@ -53,24 +63,24 @@
       align-items: center;
       justify-content: flex-start;
       cursor: default;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--bg-void); }
-    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--neon-blue), var(--neon-violet)); border-radius: 2px; }
-
-    /* =============================================
-       ANIMATED GRADIENT BACKGROUND CANVAS
-    ============================================= */
-    #bg-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
+    ::-webkit-scrollbar {
+      width: 4px;
     }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-void);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--neon-blue), var(--neon-violet));
+      border-radius: 2px;
+    }
+
+
 
     /* =============================================
        AMBIENT LIGHT ORBS
@@ -86,37 +96,67 @@
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(90px);
       opacity: 0;
       animation: orb-drift 18s infinite ease-in-out;
+      will-change: transform;
     }
 
     .orb-1 {
-      width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(0,170,255,0.18) 0%, transparent 70%);
-      top: -180px; left: -180px;
-      animation-delay: 0s; animation-duration: 22s;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(0, 170, 255, 0.18) 0%, transparent 70%);
+      top: -180px;
+      left: -180px;
+      animation-delay: 0s;
+      animation-duration: 22s;
     }
+
     .orb-2 {
-      width: 460px; height: 460px;
-      background: radial-gradient(circle, rgba(130,60,220,0.15) 0%, transparent 70%);
-      bottom: -150px; right: -150px;
-      animation-delay: -8s; animation-duration: 26s;
+      width: 460px;
+      height: 460px;
+      background: radial-gradient(circle, rgba(130, 60, 220, 0.15) 0%, transparent 70%);
+      bottom: -150px;
+      right: -150px;
+      animation-delay: -8s;
+      animation-duration: 26s;
     }
+
     .orb-3 {
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(0,200,255,0.10) 0%, transparent 70%);
-      top: 50%; left: 50%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0, 200, 255, 0.10) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
-      animation-delay: -4s; animation-duration: 30s;
+      animation-delay: -4s;
+      animation-duration: 30s;
     }
 
     @keyframes orb-drift {
-      0%   { opacity: 0.6; transform: translate(0, 0) scale(1); }
-      25%  { opacity: 0.9; transform: translate(30px, -40px) scale(1.05); }
-      50%  { opacity: 0.7; transform: translate(-20px, 20px) scale(0.95); }
-      75%  { opacity: 0.85; transform: translate(40px, 30px) scale(1.08); }
-      100% { opacity: 0.6; transform: translate(0, 0) scale(1); }
+      0% {
+        opacity: 0.6;
+        transform: translate(0, 0) scale(1);
+      }
+
+      25% {
+        opacity: 0.9;
+        transform: translate(30px, -40px) scale(1.05);
+      }
+
+      50% {
+        opacity: 0.7;
+        transform: translate(-20px, 20px) scale(0.95);
+      }
+
+      75% {
+        opacity: 0.85;
+        transform: translate(40px, 30px) scale(1.08);
+      }
+
+      100% {
+        opacity: 0.6;
+        transform: translate(0, 0) scale(1);
+      }
     }
 
     /* =============================================
@@ -128,8 +168,8 @@
       pointer-events: none;
       z-index: 1;
       background-image:
-        linear-gradient(rgba(0,180,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,180,255,0.025) 1px, transparent 1px);
+        linear-gradient(rgba(0, 180, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 180, 255, 0.025) 1px, transparent 1px);
       background-size: 60px 60px;
       mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
     }
@@ -143,10 +183,11 @@
       width: 100%;
       max-width: 520px;
       min-height: 100vh;
-      padding: 52px 20px 48px;
+      padding: 40px 20px 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       gap: 0;
     }
 
@@ -162,10 +203,10 @@
       -webkit-backdrop-filter: blur(32px) saturate(160%);
       box-shadow:
         var(--shadow-deep),
-        inset 0 1px 0 rgba(255,255,255,0.06),
-        inset 0 -1px 0 rgba(0,0,0,0.5),
-        0 0 0 1px rgba(0,180,255,0.06);
-      padding: 44px 32px 40px;
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(0, 180, 255, 0.06);
+      padding: 34px 28px 30px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -182,9 +223,11 @@
     .glass-card::before {
       content: '';
       position: absolute;
-      top: 0; left: -100%;
-      width: 60%; height: 100%;
-      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.035) 50%, transparent 60%);
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.035) 50%, transparent 60%);
       animation: card-shine 8s infinite linear 1.5s;
       pointer-events: none;
     }
@@ -193,20 +236,30 @@
     .glass-card::after {
       content: '';
       position: absolute;
-      top: 0; left: 10%; right: 10%;
+      top: 0;
+      left: 10%;
+      right: 10%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0,200,255,0.6), rgba(155,93,229,0.5), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0, 200, 255, 0.6), rgba(155, 93, 229, 0.5), transparent);
       border-radius: 50%;
       filter: blur(1px);
     }
 
     @keyframes card-shine {
-      0%   { left: -100%; }
-      100% { left: 200%; }
+      0% {
+        left: -100%;
+      }
+
+      100% {
+        left: 200%;
+      }
     }
 
     @keyframes card-enter {
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     /* =============================================
@@ -214,8 +267,8 @@
     ============================================= */
     .card-aura {
       position: absolute;
-      inset: -60px;
-      background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(0,180,255,0.07) 0%, transparent 70%);
+      inset: -20px;
+      background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(0, 180, 255, 0.07) 0%, transparent 70%);
       pointer-events: none;
       z-index: -1;
       border-radius: 50%;
@@ -223,8 +276,17 @@
     }
 
     @keyframes aura-pulse {
-      0%, 100% { opacity: 0.6; transform: scale(1); }
-      50%       { opacity: 1.0; transform: scale(1.06); }
+
+      0%,
+      100% {
+        opacity: 0.6;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1.0;
+        transform: scale(1.06);
+      }
     }
 
     /* =============================================
@@ -232,16 +294,19 @@
     ============================================= */
     .logo-wrapper {
       position: relative;
-      width: 112px;
-      height: 112px;
-      margin-bottom: 28px;
+      width: 100px;
+      height: 100px;
+      margin-bottom: 30px !important;
       opacity: 0;
       transform: scale(0.8) translateY(-10px);
       animation: logo-enter 0.9s var(--transition-smooth) 0.5s forwards;
     }
 
     @keyframes logo-enter {
-      to { opacity: 1; transform: scale(1) translateY(0); }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
 
     /* Spinning ring */
@@ -250,15 +315,13 @@
       inset: -10px;
       border-radius: 50%;
       border: 1.5px solid transparent;
-      background: conic-gradient(
-        from 0deg,
-        transparent 0deg,
-        rgba(0,200,255,0.9) 60deg,
-        rgba(155,93,229,0.7) 140deg,
-        transparent 200deg,
-        rgba(0,200,255,0.5) 280deg,
-        transparent 360deg
-      ) border-box;
+      background: conic-gradient(from 0deg,
+          transparent 0deg,
+          rgba(0, 200, 255, 0.9) 60deg,
+          rgba(155, 93, 229, 0.7) 140deg,
+          transparent 200deg,
+          rgba(0, 200, 255, 0.5) 280deg,
+          transparent 360deg) border-box;
       -webkit-mask:
         linear-gradient(#fff 0 0) padding-box,
         linear-gradient(#fff 0 0);
@@ -268,7 +331,9 @@
     }
 
     @keyframes ring-spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     /* Second ring (counter) */
@@ -277,14 +342,12 @@
       inset: -18px;
       border-radius: 50%;
       border: 1px solid transparent;
-      background: conic-gradient(
-        from 180deg,
-        transparent 0deg,
-        rgba(155,93,229,0.4) 80deg,
-        transparent 180deg,
-        rgba(0,200,255,0.3) 300deg,
-        transparent 360deg
-      ) border-box;
+      background: conic-gradient(from 180deg,
+          transparent 0deg,
+          rgba(155, 93, 229, 0.4) 80deg,
+          transparent 180deg,
+          rgba(0, 200, 255, 0.3) 300deg,
+          transparent 360deg) border-box;
       -webkit-mask:
         linear-gradient(#fff 0 0) padding-box,
         linear-gradient(#fff 0 0);
@@ -298,22 +361,22 @@
       position: absolute;
       inset: -24px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,200,255,0.25) 0%, rgba(155,93,229,0.12) 50%, transparent 70%);
+      background: radial-gradient(circle, rgba(0, 200, 255, 0.25) 0%, rgba(155, 93, 229, 0.12) 50%, transparent 70%);
       animation: aura-pulse 4s ease-in-out infinite;
       filter: blur(8px);
     }
 
     .logo-frame {
       position: relative;
-      width: 112px;
-      height: 112px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       overflow: hidden;
-      border: 2px solid rgba(0,200,255,0.35);
+      border: 2px solid rgba(0, 200, 255, 0.35);
       box-shadow:
-        0 0 20px rgba(0,200,255,0.4),
-        0 0 40px rgba(0,200,255,0.15),
-        inset 0 0 20px rgba(0,0,0,0.6);
+        0 0 20px rgba(0, 200, 255, 0.4),
+        0 0 40px rgba(0, 200, 255, 0.15),
+        inset 0 0 20px rgba(0, 0, 0, 0.6);
       background: #060c14;
     }
 
@@ -330,24 +393,21 @@
     ============================================= */
     .brand-name {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(56px, 14vw, 80px);
+      font-size: clamp(48px, 12vw, 70px);
       letter-spacing: 0.12em;
       line-height: 1;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       position: relative;
       text-align: center;
       opacity: 0;
       transform: translateY(16px);
-      animation: text-enter 0.9s var(--transition-smooth) 0.75s forwards;
-      background: linear-gradient(
-        135deg,
-        #ffffff 0%,
-        #a8d8ff 20%,
-        #00c8ff 40%,
-        #9b5de5 60%,
-        #c8e6ff 80%,
-        #ffffff 100%
-      );
+      background: linear-gradient(135deg,
+          #ffffff 0%,
+          #a8d8ff 20%,
+          #00c8ff 40%,
+          #9b5de5 60%,
+          #c8e6ff 80%,
+          #ffffff 100%);
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -355,16 +415,26 @@
       animation:
         text-enter 0.9s var(--transition-smooth) 0.75s forwards,
         chrome-shift 6s ease-in-out infinite 1.8s;
-      filter: drop-shadow(0 0 18px rgba(0,200,255,0.5)) drop-shadow(0 2px 6px rgba(0,0,0,0.8));
+      filter: drop-shadow(0 0 18px rgba(0, 200, 255, 0.5)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.8));
     }
 
     @keyframes text-enter {
-      to { opacity: 1; transform: translateY(0); }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes chrome-shift {
-      0%, 100% { background-position: 0% 50%; }
-      50%       { background-position: 100% 50%; }
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
     }
 
     /* =============================================
@@ -386,7 +456,8 @@
 
     .tagline-dot {
       display: inline-block;
-      width: 4px; height: 4px;
+      width: 4px;
+      height: 4px;
       background: var(--neon-blue);
       border-radius: 50%;
       margin: 0 8px;
@@ -396,8 +467,17 @@
     }
 
     @keyframes dot-pulse {
-      0%, 100% { box-shadow: 0 0 6px var(--neon-blue); opacity: 0.8; }
-      50%       { box-shadow: 0 0 12px var(--neon-blue), 0 0 24px rgba(0,200,255,0.5); opacity: 1; }
+
+      0%,
+      100% {
+        box-shadow: 0 0 6px var(--neon-blue);
+        opacity: 0.8;
+      }
+
+      50% {
+        box-shadow: 0 0 12px var(--neon-blue), 0 0 24px rgba(0, 200, 255, 0.5);
+        opacity: 1;
+      }
     }
 
     .tagline-secondary {
@@ -419,8 +499,8 @@
     .divider {
       width: 100%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0,200,255,0.3), rgba(155,93,229,0.25), transparent);
-      margin-bottom: 32px;
+      background: linear-gradient(90deg, transparent, rgba(0, 200, 255, 0.3), rgba(155, 93, 229, 0.25), transparent);
+      margin-bottom: 24px;
       opacity: 0;
       animation: text-enter 0.6s ease 1.3s forwards;
     }
@@ -443,20 +523,20 @@
       display: flex;
       align-items: center;
       width: 100%;
-      min-height: 62px;
-      padding: 0 22px;
+      min-height: 54px;
+      padding: 0 18px;
       text-decoration: none;
       border-radius: var(--radius-btn);
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       background: rgba(12, 22, 40, 0.8);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       overflow: hidden;
       transition:
-        transform 0.28s var(--transition-smooth),
-        box-shadow 0.28s var(--transition-smooth),
-        border-color 0.28s ease,
-        background 0.28s ease;
+        transform 0.4s var(--transition-smooth),
+        box-shadow 0.4s var(--transition-smooth),
+        border-color 0.4s var(--transition-smooth),
+        background 0.4s var(--transition-smooth);
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       will-change: transform;
@@ -465,14 +545,31 @@
     }
 
     /* Staggered entrance */
-    .link-btn:nth-child(1) { animation: btn-enter 0.7s var(--transition-smooth) 1.4s forwards; }
-    .link-btn:nth-child(2) { animation: btn-enter 0.7s var(--transition-smooth) 1.52s forwards; }
-    .link-btn:nth-child(3) { animation: btn-enter 0.7s var(--transition-smooth) 1.64s forwards; }
-    .link-btn:nth-child(4) { animation: btn-enter 0.7s var(--transition-smooth) 1.76s forwards; }
-    .link-btn:nth-child(5) { animation: btn-enter 0.7s var(--transition-smooth) 1.88s forwards; }
+    .link-btn:nth-child(1) {
+      animation: btn-enter 0.7s var(--transition-smooth) 1.4s forwards;
+    }
+
+    .link-btn:nth-child(2) {
+      animation: btn-enter 0.7s var(--transition-smooth) 1.52s forwards;
+    }
+
+    .link-btn:nth-child(3) {
+      animation: btn-enter 0.7s var(--transition-smooth) 1.64s forwards;
+    }
+
+    .link-btn:nth-child(4) {
+      animation: btn-enter 0.7s var(--transition-smooth) 1.76s forwards;
+    }
+
+    .link-btn:nth-child(5) {
+      animation: btn-enter 0.7s var(--transition-smooth) 1.88s forwards;
+    }
 
     @keyframes btn-enter {
-      to { opacity: 1; transform: translateX(0); }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     /* Animated border glow sweep */
@@ -500,32 +597,41 @@
     }
 
     @keyframes border-rotate {
-      to { --angle: 360deg; }
+      to {
+        --angle: 360deg;
+      }
     }
 
     /* Shimmer sweep inside button */
     .link-btn::after {
       content: '';
       position: absolute;
-      top: 0; left: -80%;
-      width: 60%; height: 100%;
-      background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.06) 50%, transparent 70%);
+      top: 0;
+      left: -80%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.06) 50%, transparent 70%);
       transition: left 0.5s ease;
       pointer-events: none;
     }
 
-    .link-btn:hover::after { left: 160%; }
-    .link-btn:hover::before { opacity: 1; }
+    .link-btn:hover::after {
+      left: 160%;
+    }
+
+    .link-btn:hover::before {
+      opacity: 1;
+    }
 
     .link-btn:hover {
       transform: translateY(-3px) scale(1.012);
-      border-color: rgba(0,200,255,0.2);
+      border-color: rgba(0, 200, 255, 0.2);
       background: rgba(16, 30, 54, 0.9);
     }
 
     .link-btn:active {
       transform: translateY(1px) scale(0.985);
-      transition-duration: 0.1s;
+      transition-duration: 0.15s;
     }
 
     /* =============================================
@@ -542,7 +648,7 @@
       margin-right: 16px;
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s var(--transition-smooth);
+      transition: transform 0.4s var(--transition-smooth);
     }
 
     .link-btn:hover .btn-icon {
@@ -585,8 +691,13 @@
       transition: color 0.3s ease;
     }
 
-    .link-btn:hover .btn-title   { color: #fff; }
-    .link-btn:hover .btn-subtitle { color: var(--text-secondary); }
+    .link-btn:hover .btn-title {
+      color: #fff;
+    }
+
+    .link-btn:hover .btn-subtitle {
+      color: var(--text-secondary);
+    }
 
     /* =============================================
        BUTTON ARROW
@@ -595,20 +706,20 @@
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
       transition:
-        border-color 0.3s ease,
-        background 0.3s ease,
-        transform 0.3s var(--transition-smooth);
+        border-color 0.4s ease,
+        background 0.4s ease,
+        transform 0.4s var(--transition-smooth);
     }
 
     .link-btn:hover .btn-arrow {
-      border-color: rgba(0,200,255,0.5);
-      background: rgba(0,200,255,0.1);
+      border-color: rgba(0, 200, 255, 0.5);
+      background: rgba(0, 200, 255, 0.1);
       transform: translateX(4px);
     }
 
@@ -619,61 +730,83 @@
       transition: stroke 0.3s ease;
     }
 
-    .link-btn:hover .btn-arrow svg { stroke: var(--neon-blue); }
+    .link-btn:hover .btn-arrow svg {
+      stroke: var(--neon-blue);
+    }
 
     /* =============================================
        INDIVIDUAL BUTTON STYLES
     ============================================= */
     /* Facebook */
-    .btn-facebook { --btn-accent: #1877F2; }
+    .btn-facebook {
+      --btn-accent: #1877F2;
+    }
+
     .btn-facebook .btn-icon {
       background: linear-gradient(135deg, #1877F2, #0d5ed4);
-      box-shadow: 0 4px 20px rgba(24,119,242,0.35);
+      box-shadow: 0 4px 20px rgba(24, 119, 242, 0.35);
     }
+
     .btn-facebook:hover {
-      box-shadow: 0 8px 32px rgba(24,119,242,0.25), 0 2px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 32px rgba(24, 119, 242, 0.25), 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
     /* Instagram */
-    .btn-instagram { --btn-accent: #E1306C; }
+    .btn-instagram {
+      --btn-accent: #E1306C;
+    }
+
     .btn-instagram .btn-icon {
       background: linear-gradient(135deg, #405DE6, #833AB4, #C13584, #E1306C, #FD1D1D);
-      box-shadow: 0 4px 20px rgba(193,53,132,0.35);
+      box-shadow: 0 4px 20px rgba(193, 53, 132, 0.35);
     }
+
     .btn-instagram:hover {
-      box-shadow: 0 8px 32px rgba(193,53,132,0.25), 0 2px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 32px rgba(193, 53, 132, 0.25), 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
     /* TikTok */
-    .btn-tiktok { --btn-accent: #69C9D0; }
+    .btn-tiktok {
+      --btn-accent: #69C9D0;
+    }
+
     .btn-tiktok .btn-icon {
       background: linear-gradient(135deg, #010101, #1a1a1a);
-      box-shadow: 0 4px 20px rgba(105,201,208,0.25);
-      border: 1px solid rgba(105,201,208,0.3);
+      box-shadow: 0 4px 20px rgba(105, 201, 208, 0.25);
+      border: 1px solid rgba(105, 201, 208, 0.3);
     }
+
     .btn-tiktok:hover {
-      box-shadow: 0 8px 32px rgba(105,201,208,0.2), 0 2px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 32px rgba(105, 201, 208, 0.2), 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
     /* WhatsApp */
-    .btn-whatsapp { --btn-accent: #25D366; }
+    .btn-whatsapp {
+      --btn-accent: #25D366;
+    }
+
     .btn-whatsapp .btn-icon {
       background: linear-gradient(135deg, #128C7E, #25D366);
-      box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
     }
+
     .btn-whatsapp:hover {
-      box-shadow: 0 8px 32px rgba(37,211,102,0.25), 0 2px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 32px rgba(37, 211, 102, 0.25), 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
     /* Official Store */
-    .btn-store { --btn-accent: var(--neon-blue); }
-    .btn-store .btn-icon {
-      background: linear-gradient(135deg, rgba(0,200,255,0.2), rgba(155,93,229,0.25));
-      border: 1px solid rgba(0,200,255,0.4);
-      box-shadow: 0 4px 20px rgba(0,200,255,0.2);
+    .btn-store {
+      --btn-accent: var(--neon-blue);
     }
+
+    .btn-store .btn-icon {
+      background: linear-gradient(135deg, rgba(0, 200, 255, 0.2), rgba(155, 93, 229, 0.25));
+      border: 1px solid rgba(0, 200, 255, 0.4);
+      box-shadow: 0 4px 20px rgba(0, 200, 255, 0.2);
+    }
+
     .btn-store:hover {
-      box-shadow: 0 8px 40px rgba(0,200,255,0.25), 0 2px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 40px rgba(0, 200, 255, 0.25), 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
     .btn-store-badge {
@@ -682,8 +815,8 @@
       font-weight: 700;
       letter-spacing: 0.12em;
       color: var(--neon-blue);
-      background: rgba(0,200,255,0.1);
-      border: 1px solid rgba(0,200,255,0.3);
+      background: rgba(0, 200, 255, 0.1);
+      border: 1px solid rgba(0, 200, 255, 0.3);
       padding: 2px 7px;
       border-radius: 4px;
       text-transform: uppercase;
@@ -691,8 +824,15 @@
     }
 
     @keyframes badge-pulse {
-      0%, 100% { box-shadow: 0 0 6px rgba(0,200,255,0.3); }
-      50%       { box-shadow: 0 0 14px rgba(0,200,255,0.6); }
+
+      0%,
+      100% {
+        box-shadow: 0 0 6px rgba(0, 200, 255, 0.3);
+      }
+
+      50% {
+        box-shadow: 0 0 14px rgba(0, 200, 255, 0.6);
+      }
     }
 
     /* =============================================
@@ -705,7 +845,7 @@
       gap: 28px;
       margin-top: 34px;
       padding-top: 28px;
-      border-top: 1px solid rgba(255,255,255,0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
       width: 100%;
       opacity: 0;
       animation: text-enter 0.8s ease 2.1s forwards;
@@ -738,7 +878,7 @@
     .stat-sep {
       width: 1px;
       height: 36px;
-      background: linear-gradient(180deg, transparent, rgba(0,200,255,0.3), transparent);
+      background: linear-gradient(180deg, transparent, rgba(0, 200, 255, 0.3), transparent);
     }
 
     /* =============================================
@@ -783,33 +923,139 @@
       inset: 0;
       pointer-events: none;
       z-index: 3;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.06) 2px,
-        rgba(0,0,0,0.06) 4px
-      );
+      background: repeating-linear-gradient(0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 0, 0, 0.06) 2px,
+          rgba(0, 0, 0, 0.06) 4px);
     }
 
     /* =============================================
-       RESPONSIVE
+       RESPONSIVE & MOBILE OPTIMIZATIONS
     ============================================= */
     @media (max-width: 480px) {
-      .page-wrapper { padding: 36px 14px 40px; }
-      .glass-card   { padding: 36px 20px 32px; }
-      .logo-wrapper { width: 96px; height: 96px; }
-      .logo-frame   { width: 96px; height: 96px; }
-      .link-btn     { min-height: 58px; padding: 0 16px; }
-      .btn-icon     { width: 36px; height: 36px; margin-right: 12px; }
-      .stats-row    { gap: 18px; }
+      .page-wrapper {
+        padding: 24px 12px 32px;
+      }
+
+      .glass-card {
+        padding: 26px 16px 20px;
+      }
+
+      .logo-wrapper {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 12px;
+      }
+
+      .logo-frame {
+        width: 80px;
+        height: 80px;
+      }
+
+      .brand-name {
+        font-size: clamp(42px, 11vw, 54px);
+      }
+
+      .tagline-primary {
+        font-size: 11px;
+        letter-spacing: 0.25em;
+      }
+
+      .link-btn {
+        min-height: 50px;
+        padding: 0 14px;
+      }
+
+      .btn-icon {
+        width: 34px;
+        height: 34px;
+        margin-right: 10px;
+      }
+
+      .stats-row {
+        gap: 14px;
+        margin-top: 24px;
+        padding-top: 24px;
+      }
+
+      .stat-value {
+        font-size: 22px;
+      }
+    }
+
+    @media (hover: none) {
+
+      /* Prevent sticky hover effects on touch devices */
+      .link-btn:hover {
+        transform: translateX(0) !important;
+        border-color: rgba(255, 255, 255, 0.06) !important;
+        background: rgba(12, 22, 40, 0.8) !important;
+      }
+
+      .link-btn:hover::before {
+        opacity: 0 !important;
+      }
+
+      .link-btn:hover .btn-icon {
+        transform: none !important;
+      }
+
+      .link-btn:hover .btn-title {
+        color: var(--text-primary) !important;
+      }
+
+      .link-btn:hover .btn-subtitle {
+        color: var(--text-muted) !important;
+      }
+
+      .link-btn:hover .btn-arrow {
+        border-color: rgba(255, 255, 255, 0.1) !important;
+        background: transparent !important;
+        transform: none !important;
+      }
+
+      .link-btn:hover .btn-arrow svg {
+        stroke: var(--text-secondary) !important;
+      }
+
+      .btn-facebook:hover,
+      .btn-instagram:hover,
+      .btn-tiktok:hover,
+      .btn-whatsapp:hover,
+      .btn-store:hover {
+        box-shadow: none !important;
+      }
+
+      .btn-facebook:hover .btn-icon {
+        box-shadow: 0 4px 20px rgba(24, 119, 242, 0.35) !important;
+      }
+
+      .btn-instagram:hover .btn-icon {
+        box-shadow: 0 4px 20px rgba(193, 53, 132, 0.35) !important;
+      }
+
+      .btn-tiktok:hover .btn-icon {
+        box-shadow: 0 4px 20px rgba(105, 201, 208, 0.25) !important;
+      }
+
+      .btn-whatsapp:hover .btn-icon {
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35) !important;
+      }
+
+      .btn-store:hover .btn-icon {
+        box-shadow: 0 4px 20px rgba(0, 200, 255, 0.2) !important;
+      }
     }
 
     @media (min-width: 640px) {
-      .page-wrapper { padding: 64px 24px 56px; }
+      .page-wrapper {
+        padding: 64px 24px 56px;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Background Orbs -->
@@ -828,226 +1074,206 @@
   <!-- Particle System Canvas -->
   <canvas id="particle-canvas"></canvas>
 
-  <!-- Animated BG Canvas -->
-  <canvas id="bg-canvas"></canvas>
+
 
   <!-- ==========================================
        MAIN PAGE
   =========================================== -->
   <div class="page-wrapper">
 
-    <!-- CARD AURA -->
-    <div class="card-aura" style="position:relative; pointer-events:none; z-index:0;"></div>
+    <div style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center;">
+      <!-- CARD AURA -->
+      <div class="card-aura"></div>
 
-    <div class="glass-card" id="main-card">
+      <div class="glass-card" id="main-card">
 
-      <!-- ======================================
+        <!-- ======================================
            LOGO SECTION
       ======================================= -->
-      <div class="logo-wrapper">
-        <div class="logo-glow"></div>
-        <div class="logo-ring-2"></div>
-        <div class="logo-ring"></div>
-        <div class="logo-frame">
-          <!-- VOGIX Logo -->
-          <img
-            src="https://www.image2url.com/r2/default/images/1777713783463-dc7788b7-7690-4951-91e4-86842ae52e3d.jpg"
-            alt="VOGIX Logo"
-            loading="eager"
-          />
+        <div class="logo-wrapper">
+          <div class="logo-glow"></div>
+          <div class="logo-ring-2"></div>
+          <div class="logo-ring"></div>
+          <div class="logo-frame">
+            <!-- VOGIX Logo -->
+            <img
+              src="https://www.image2url.com/r2/default/images/1777713783463-dc7788b7-7690-4951-91e4-86842ae52e3d.jpg"
+              alt="VOGIX Logo" loading="eager" />
+          </div>
         </div>
-      </div>
 
-      <!-- Brand Name -->
-      <h1 class="brand-name">VOGIX</h1>
+        <!-- Brand Name -->
+        <h1 class="brand-name">VOGIX</h1>
 
-      <!-- Primary Tagline -->
-      <p class="tagline-primary">
-        Premium Hoodies
-        <span class="tagline-dot"></span>
-        Streetwear
-      </p>
+        <!-- Primary Tagline -->
+        <p class="tagline-primary">
+          Premium Hoodies
+          <span class="tagline-dot"></span>
+          Streetwear
+        </p>
 
-      <!-- Secondary Tagline -->
-      <p class="tagline-secondary">Designed for those who move different.</p>
+        <!-- Secondary Tagline -->
+        <p class="tagline-secondary">Designed for those who move different.</p>
 
-      <!-- Divider -->
-      <div class="divider"></div>
+        <!-- Divider -->
+        <div class="divider"></div>
 
-      <!-- ======================================
+        <!-- ======================================
            SOCIAL LINKS
            To update links, find and replace the href="..." values below
       ======================================= -->
-      <div class="links-container">
+        <div class="links-container">
 
-        <!-- ==========================================
+          <!-- ==========================================
              FACEBOOK
              REPLACE: href="https://facebook.com/yourpage"
         =========================================== -->
-        <a
-          href="https://facebook.com/yourpage"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="link-btn btn-facebook"
-          aria-label="Follow VOGIX on Facebook"
-        >
-          <div class="btn-icon">
-            <!-- Facebook Icon (SVG) -->
-            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-            </svg>
-          </div>
-          <div class="btn-content">
-            <span class="btn-title">Facebook</span>
-            <span class="btn-subtitle">facebook.com/vogix</span>
-          </div>
-          <div class="btn-arrow">
-            <svg viewBox="0 0 16 16" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
-            </svg>
-          </div>
-        </a>
+          <a href="https://facebook.com/yourpage" target="_blank" rel="noopener noreferrer"
+            class="link-btn btn-facebook" aria-label="Follow VOGIX on Facebook">
+            <div class="btn-icon">
+              <!-- Facebook Icon (SVG) -->
+              <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+            </div>
+            <div class="btn-content">
+              <span class="btn-title">Facebook</span>
+              <span class="btn-subtitle">facebook.com/vogix</span>
+            </div>
+            <div class="btn-arrow">
+              <svg viewBox="0 0 16 16" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </div>
+          </a>
 
-        <!-- ==========================================
+          <!-- ==========================================
              INSTAGRAM
              REPLACE: href="https://instagram.com/yourpage"
         =========================================== -->
-        <a
-          href="https://instagram.com/yourpage"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="link-btn btn-instagram"
-          aria-label="Follow VOGIX on Instagram"
-        >
-          <div class="btn-icon">
-            <!-- Instagram Icon (SVG) -->
-            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-            </svg>
-          </div>
-          <div class="btn-content">
-            <span class="btn-title">Instagram</span>
-            <span class="btn-subtitle">instagram.com/vogix</span>
-          </div>
-          <div class="btn-arrow">
-            <svg viewBox="0 0 16 16" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
-            </svg>
-          </div>
-        </a>
+          <a href="https://instagram.com/yourpage" target="_blank" rel="noopener noreferrer"
+            class="link-btn btn-instagram" aria-label="Follow VOGIX on Instagram">
+            <div class="btn-icon">
+              <!-- Instagram Icon (SVG) -->
+              <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+              </svg>
+            </div>
+            <div class="btn-content">
+              <span class="btn-title">Instagram</span>
+              <span class="btn-subtitle">instagram.com/vogix</span>
+            </div>
+            <div class="btn-arrow">
+              <svg viewBox="0 0 16 16" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </div>
+          </a>
 
-        <!-- ==========================================
+          <!-- ==========================================
              TIKTOK
              REPLACE: href="https://tiktok.com/@yourpage"
         =========================================== -->
-        <a
-          href="https://tiktok.com/@yourpage"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="link-btn btn-tiktok"
-          aria-label="Follow VOGIX on TikTok"
-        >
-          <div class="btn-icon">
-            <!-- TikTok Icon (SVG) -->
-            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-            </svg>
-          </div>
-          <div class="btn-content">
-            <span class="btn-title">TikTok</span>
-            <span class="btn-subtitle">tiktok.com/@vogix</span>
-          </div>
-          <div class="btn-arrow">
-            <svg viewBox="0 0 16 16" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
-            </svg>
-          </div>
-        </a>
+          <a href="https://tiktok.com/@yourpage" target="_blank" rel="noopener noreferrer" class="link-btn btn-tiktok"
+            aria-label="Follow VOGIX on TikTok">
+            <div class="btn-icon">
+              <!-- TikTok Icon (SVG) -->
+              <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+              </svg>
+            </div>
+            <div class="btn-content">
+              <span class="btn-title">TikTok</span>
+              <span class="btn-subtitle">tiktok.com/@vogix</span>
+            </div>
+            <div class="btn-arrow">
+              <svg viewBox="0 0 16 16" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </div>
+          </a>
 
-        <!-- ==========================================
+          <!-- ==========================================
              WHATSAPP
              REPLACE: href="https://wa.me/201000000000"
         =========================================== -->
-        <a
-          href="https://wa.me/201000000000"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="link-btn btn-whatsapp"
-          aria-label="Contact VOGIX on WhatsApp"
-        >
-          <div class="btn-icon">
-            <!-- WhatsApp Icon (SVG) -->
-            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-          </div>
-          <div class="btn-content">
-            <span class="btn-title">WhatsApp</span>
-            <span class="btn-subtitle">Chat with us directly</span>
-          </div>
-          <div class="btn-arrow">
-            <svg viewBox="0 0 16 16" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
-            </svg>
-          </div>
-        </a>
+          <a href="https://wa.me/201000000000" target="_blank" rel="noopener noreferrer" class="link-btn btn-whatsapp"
+            aria-label="Contact VOGIX on WhatsApp">
+            <div class="btn-icon">
+              <!-- WhatsApp Icon (SVG) -->
+              <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+            </div>
+            <div class="btn-content">
+              <span class="btn-title">WhatsApp</span>
+              <span class="btn-subtitle">Chat with us directly</span>
+            </div>
+            <div class="btn-arrow">
+              <svg viewBox="0 0 16 16" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </div>
+          </a>
 
-        <!-- ==========================================
+          <!-- ==========================================
              OFFICIAL STORE
              REPLACE: href="https://yourstore.com"
         =========================================== -->
-        <a
-          href="https://yourstore.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="link-btn btn-store"
-          aria-label="Shop VOGIX Official Store"
-        >
-          <div class="btn-icon">
-            <!-- Store Bag Icon (SVG) -->
-            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(0,200,255,0.9)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <path d="M16 10a4 4 0 01-8 0"/>
-            </svg>
-          </div>
-          <div class="btn-content">
-            <span class="btn-title">Official Store</span>
-            <span class="btn-subtitle">Shop the collection</span>
-          </div>
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span class="btn-store-badge">LIVE</span>
-            <div class="btn-arrow">
-              <svg viewBox="0 0 16 16" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 8h10M9 4l4 4-4 4"/>
+          <a href="https://yourstore.com" target="_blank" rel="noopener noreferrer" class="link-btn btn-store"
+            aria-label="Shop VOGIX Official Store">
+            <div class="btn-icon">
+              <!-- Store Bag Icon (SVG) -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="rgba(0,200,255,0.9)" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 01-8 0" />
               </svg>
             </div>
+            <div class="btn-content">
+              <span class="btn-title">Official Store</span>
+              <span class="btn-subtitle">Shop the collection</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="btn-store-badge">LIVE</span>
+              <div class="btn-arrow">
+                <svg viewBox="0 0 16 16" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 8h10M9 4l4 4-4 4" />
+                </svg>
+              </div>
+            </div>
+          </a>
+
+        </div>
+        <!-- end .links-container -->
+
+        <!-- STATS ROW -->
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value">50K+</div>
+            <div class="stat-label">Followers</div>
           </div>
-        </a>
+          <div class="stat-sep"></div>
+          <div class="stat-item">
+            <div class="stat-value">2K+</div>
+            <div class="stat-label">Orders</div>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat-item">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Premium</div>
+          </div>
+        </div>
 
       </div>
-      <!-- end .links-container -->
-
-      <!-- STATS ROW -->
-      <div class="stats-row">
-        <div class="stat-item">
-          <div class="stat-value">50K+</div>
-          <div class="stat-label">Followers</div>
-        </div>
-        <div class="stat-sep"></div>
-        <div class="stat-item">
-          <div class="stat-value">2K+</div>
-          <div class="stat-label">Orders</div>
-        </div>
-        <div class="stat-sep"></div>
-        <div class="stat-item">
-          <div class="stat-value">100%</div>
-          <div class="stat-label">Premium</div>
-        </div>
-      </div>
-
+      <!-- end .glass-card -->
     </div>
-    <!-- end .glass-card -->
+    <!-- end card container -->
 
     <!-- FOOTER -->
     <footer class="page-footer">
@@ -1064,66 +1290,21 @@
        JAVASCRIPT — ANIMATIONS & INTERACTIONS
   ============================================= -->
   <script>
-    /* ============================================
-       1. BACKGROUND GRADIENT ANIMATION
-    ============================================ */
-    (function() {
-      const canvas = document.getElementById('bg-canvas');
-      const ctx    = canvas.getContext('2d');
-      let W, H, tick = 0;
 
-      function resize() {
-        W = canvas.width  = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-      }
-
-      function draw() {
-        tick += 0.004;
-        ctx.clearRect(0, 0, W, H);
-
-        // Base fill
-        ctx.fillStyle = '#020408';
-        ctx.fillRect(0, 0, W, H);
-
-        // Moving radial 1 — blue
-        const x1 = W * 0.5 + Math.sin(tick * 0.7) * W * 0.35;
-        const y1 = H * 0.3 + Math.cos(tick * 0.5) * H * 0.2;
-        const g1 = ctx.createRadialGradient(x1, y1, 0, x1, y1, Math.min(W,H) * 0.55);
-        g1.addColorStop(0, 'rgba(0,140,230,0.09)');
-        g1.addColorStop(1, 'transparent');
-        ctx.fillStyle = g1;
-        ctx.fillRect(0, 0, W, H);
-
-        // Moving radial 2 — violet
-        const x2 = W * 0.5 + Math.cos(tick * 0.4) * W * 0.38;
-        const y2 = H * 0.7 + Math.sin(tick * 0.6) * H * 0.25;
-        const g2 = ctx.createRadialGradient(x2, y2, 0, x2, y2, Math.min(W,H) * 0.5);
-        g2.addColorStop(0, 'rgba(110,50,200,0.07)');
-        g2.addColorStop(1, 'transparent');
-        ctx.fillStyle = g2;
-        ctx.fillRect(0, 0, W, H);
-
-        requestAnimationFrame(draw);
-      }
-
-      resize();
-      window.addEventListener('resize', resize);
-      draw();
-    })();
 
 
     /* ============================================
        2. PARTICLE SYSTEM
     ============================================ */
-    (function() {
+    (function () {
       const canvas = document.getElementById('particle-canvas');
-      const ctx    = canvas.getContext('2d');
+      const ctx = canvas.getContext('2d');
       let W, H;
       const PARTICLE_COUNT = 55;
       const particles = [];
 
       function resize() {
-        W = canvas.width  = window.innerWidth;
+        W = canvas.width = window.innerWidth;
         H = canvas.height = window.innerHeight;
       }
 
@@ -1131,13 +1312,13 @@
 
       function createParticle() {
         return {
-          x:     rand(0, W),
-          y:     rand(0, H),
-          r:     rand(0.5, 2.2),
-          vx:    rand(-0.12, 0.12),
-          vy:    rand(-0.22, -0.05),
+          x: rand(0, W),
+          y: rand(0, H),
+          r: rand(0.5, 2.2),
+          vx: rand(-0.06, 0.06),
+          vy: rand(-0.12, -0.03),
           alpha: rand(0.15, 0.6),
-          da:    rand(-0.002, 0.002),
+          da: rand(-0.0015, 0.0015),
           color: Math.random() > 0.5
             ? `rgba(0,200,255,`
             : `rgba(155,93,229,`
@@ -1149,8 +1330,8 @@
       function draw() {
         ctx.clearRect(0, 0, W, H);
         particles.forEach(p => {
-          p.x     += p.vx;
-          p.y     += p.vy;
+          p.x += p.vx;
+          p.y += p.vy;
           p.alpha += p.da;
 
           if (p.alpha < 0.05 || p.alpha > 0.65) p.da *= -1;
@@ -1159,7 +1340,7 @@
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
           ctx.fillStyle = p.color + p.alpha + ')';
-          ctx.shadowBlur  = 8;
+          ctx.shadowBlur = 8;
           ctx.shadowColor = p.color + '0.8)';
           ctx.fill();
           ctx.shadowBlur = 0;
@@ -1177,47 +1358,62 @@
     /* ============================================
        3. 3D TILT EFFECT ON CARD (desktop)
     ============================================ */
-    (function() {
+    (function () {
       const card = document.getElementById('main-card');
       if (!card) return;
 
-      const MAX_TILT  = 10;
-      const MAX_SHINE = 14;
+      const MAX_TILT = 8;
       let rect;
+
+      let targetRotX = 0;
+      let targetRotY = 0;
+      let currentRotX = 0;
+      let currentRotY = 0;
 
       function getRect() { rect = card.getBoundingClientRect(); }
       getRect();
       window.addEventListener('resize', getRect);
 
-      document.addEventListener('mousemove', function(e) {
+      document.addEventListener('mousemove', function (e) {
         if (!rect) return;
-        const cx = rect.left + rect.width  / 2;
-        const cy = rect.top  + rect.height / 2;
-        const dx = (e.clientX - cx) / (rect.width  / 2);
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = (e.clientX - cx) / (rect.width / 2);
         const dy = (e.clientY - cy) / (rect.height / 2);
 
         // Only tilt when cursor is near the card
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist > 2.5) {
-          card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+          targetRotX = 0;
+          targetRotY = 0;
           return;
         }
 
-        const rotX = -dy * MAX_TILT;
-        const rotY =  dx * MAX_TILT;
+        targetRotX = -dy * MAX_TILT;
+        targetRotY = dx * MAX_TILT;
+      });
 
+      document.addEventListener('mouseleave', function () {
+        targetRotX = 0;
+        targetRotY = 0;
+      });
+
+      function render() {
+        // Lerp for buttery smooth tracking
+        currentRotX += (targetRotX - currentRotX) * 0.08;
+        currentRotY += (targetRotY - currentRotY) * 0.08;
+
+        // Apply transform
         card.style.transform =
-          `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(2px)`;
-        card.style.transition = 'transform 0.1s ease';
-      });
+          `perspective(1000px) rotateX(${currentRotX}deg) rotateY(${currentRotY}deg) translateZ(2px)`;
 
-      document.addEventListener('mouseleave', function() {
-        card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
-        card.style.transition = 'transform 0.7s cubic-bezier(0.23,1,0.32,1)';
-      });
+        requestAnimationFrame(render);
+      }
 
       // Touch — disable tilt on mobile for performance
-      if ('ontouchstart' in window) {
+      if (!('ontouchstart' in window)) {
+        render();
+      } else {
         card.style.transform = 'none';
       }
     })();
@@ -1226,35 +1422,35 @@
     /* ============================================
        4. BUTTON CLICK RIPPLE
     ============================================ */
-    document.querySelectorAll('.link-btn').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
+    document.querySelectorAll('.link-btn').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
         const ripple = document.createElement('span');
-        const bRect  = btn.getBoundingClientRect();
-        const size   = Math.max(bRect.width, bRect.height) * 1.5;
-        const x      = e.clientX - bRect.left - size / 2;
-        const y      = e.clientY - bRect.top  - size / 2;
+        const bRect = btn.getBoundingClientRect();
+        const size = Math.max(bRect.width, bRect.height) * 1.5;
+        const x = e.clientX - bRect.left - size / 2;
+        const y = e.clientY - bRect.top - size / 2;
 
         Object.assign(ripple.style, {
-          position:     'absolute',
-          width:        size + 'px',
-          height:       size + 'px',
-          left:         x + 'px',
-          top:          y + 'px',
+          position: 'absolute',
+          width: size + 'px',
+          height: size + 'px',
+          left: x + 'px',
+          top: y + 'px',
           borderRadius: '50%',
-          background:   'rgba(255,255,255,0.07)',
-          transform:    'scale(0)',
-          animation:    'ripple-expand 0.55s ease-out forwards',
-          pointerEvents:'none',
-          zIndex:       '0'
+          background: 'rgba(255,255,255,0.07)',
+          transform: 'scale(0)',
+          animation: 'ripple-expand 0.55s ease-out forwards',
+          pointerEvents: 'none',
+          zIndex: '0'
         });
 
         btn.appendChild(ripple);
-        setTimeout(function() { ripple.remove(); }, 600);
+        setTimeout(function () { ripple.remove(); }, 600);
       });
     });
 
     /* Ripple keyframe via injected style */
-    (function() {
+    (function () {
       const s = document.createElement('style');
       s.textContent = `
         @keyframes ripple-expand {
@@ -1266,4 +1462,5 @@
   </script>
 
 </body>
+
 </html>
